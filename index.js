@@ -1,4 +1,4 @@
-
+"use strict";
 
 exports.password=function(){
     this.setup={
