@@ -23,7 +23,7 @@ exports.password=function(){
             special:9,
             size:19,
         }
-    }
+    };
     this.log={};
     this.reset=function(){
         passt.log={
@@ -46,8 +46,8 @@ exports.password=function(){
             failed:[],
             ok:[],
             result:true
-        }
-    }
+        };
+    };
     this.password="";
     this.set=function(type, name, value){
         if(typeof passt.setup[type] === "undefined")
@@ -66,16 +66,16 @@ exports.password=function(){
         }
         passt.setup[type][name]=value;
         return true;
-    }
+    };
     this.getLog = function(){
         return passt.log;
-    }
+    };
     this.tools={
         failed:function(target, limit){
             if(typeof limit === "undefined"){
                 limit = "min";
             }else{
-                limit = "max"
+                limit = "max";
             }
             if(
                 (typeof target !== "undefined")&&
@@ -114,7 +114,7 @@ exports.password=function(){
             checkStr=[...new Set(checkStr)];
 
         }
-    }
+    };
     this.check=function(password){
         passt.password = password;
         passt.reset();
@@ -155,7 +155,8 @@ exports.password=function(){
             );
         return passt.log.result;
 
-    }
+    };
     var passt = this;
+};
 
-}
+
