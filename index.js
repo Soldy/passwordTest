@@ -108,11 +108,6 @@ exports.password=function(){
             )
                 return passt.tools.failed(target, 1);
             return true;
-        },
-        duplication:function(checkStr){
-            let length = parseInt(checkStr.length);
-            checkStr=[...new Set(checkStr)];
-
         }
     };
     this.check=function(password){
