@@ -59,7 +59,7 @@ exports.password=function(){
             (0 > [true, false].indexOf(value))
         )
             return false;
-        if(['min','max'].indexOf(type) > -1){
+        if(["min","max"].indexOf(type) > -1){
             if (parseInt(value).toString() !== value.toString())
                 return false;
             value = parseInt(value);
@@ -108,12 +108,11 @@ exports.password=function(){
             )
                 return passt.tools.failed(target, 1);
             return true;
-        },
+        }/*,
         duplication:function(checkStr){
-            let length = parseInt(checkStr.length);
             checkStr=[...new Set(checkStr)];
 
-        }
+        }*/
     };
     this.check=function(password){
         passt.password = password;
@@ -141,17 +140,17 @@ exports.password=function(){
             );
         if(passt.setup.check.special)
             passt.log.checks.special = passt.tools.check(
-                passt.password.match(/[$\(\)@\.!%*#?&]/g),
+                passt.password.match(/[$()@.!%*#?&]/g),
                 passt.setup.min.special,
                 passt.setup.max.special,
                 "special"
             );
         if(passt.setup.check.size)
             passt.log.checks.size = passt.tools.check(
-               passt.password,
-               passt.setup.min.size,
-               passt.setup.max.size,
-               "size"
+                passt.password,
+                passt.setup.min.size,
+                passt.setup.max.size,
+                "size"
             );
         return passt.log.result;
 
