@@ -17,4 +17,6 @@ jspm_packages/
 .editorconfig
 .eslintrc.json
 .jshintrc
+.gitattributes
+.travis.yml
 
