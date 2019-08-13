@@ -1,6 +1,6 @@
 {
   "name": "passwordtest",
-  "version": "0.0.1",
+  "version": "0.0.1-rc1",
   "description": "Password Strength Tester",
   "main": "index.js",
   "scripts": {

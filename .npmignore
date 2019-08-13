@@ -12,4 +12,11 @@ jspm_packages/
 .env
 .next
 .git
+.npmignore
+.gitignore
+.editorconfig
+.eslintrc.json
+.jshintrc
+.gitattributes
+.travis.yml
 
