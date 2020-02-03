@@ -7,6 +7,8 @@ exports.password=function(){
      * object
      */
     this.check=function(pass){
+        if(typeof pass === "string")
+            return false;
         password = pass;
         reset();
         if(setup.check.upperCase)
@@ -160,7 +162,6 @@ exports.password=function(){
             (typeof log.checks[limit][target] !== "undefined")
         )
             log.checks[limit][target] = false;
-            
         log.result=false;
         return false;
     };
@@ -174,10 +175,25 @@ exports.password=function(){
      */
     let checkCase =function(checkStr, min, max, target){
         if (
+            (typeof target === "undefined")||
+            (typeof target !== "string")
+        )
+            return false;
+        if (
+            (typeof max === "undefined")||
+            (parseInt(max).toString() !== (max).toString())
+        )
+            return false;
+        if (
+            (typeof min === "undefined")||
+            (parseInt(min).toString() !== (min).toString())
+        )
+            return false;
+        if (
             (typeof checkStr === "undefined")||
             (checkStr === null)
         )
-            return failed(target);
+            return false;
         if(
             (parseInt(min).toString() != min.toString())||
             (parseInt(max).toString() != max.toString())
