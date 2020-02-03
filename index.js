@@ -2,6 +2,7 @@
 
 exports.password=function(){
     /*
+     * @param string {pass}
      * @public
      * object
      */
@@ -46,7 +47,8 @@ exports.password=function(){
         return log.result;
 
     };
-    /* @param string {type}
+    /*
+     * @param string {type}
      * @param string {name}
      * @param string/number {value}
      * @public
@@ -141,6 +143,9 @@ exports.password=function(){
         };
     };
     /*
+     * @param string {target}
+     * @param string {limit}
+     * @param string/number {value}
      * @private
      * boolean
      */
@@ -160,6 +165,10 @@ exports.password=function(){
         return false;
     };
     /*
+     * @param string  {checkStr}
+     * @param integer {max}
+     * @param integer {min}
+     * @param string  {target}
      * @private
      * boolean
      */
@@ -187,6 +196,7 @@ exports.password=function(){
         return true;
     };
     /*
+     * @param string {checkStr}
      * @private
      * boolean
      */
