@@ -109,7 +109,14 @@ exports.password=function(){
      * object
      */
     let log={};
+    /*
+     * @private
+     * string
+     */
     let password="";
+    /*
+     * @private
+     */
     let reset=function(){
         log={
             checks:{
