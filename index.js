@@ -30,6 +30,7 @@ exports.password=function(){
             password,
             "size"
         );
+        log.values.duplication = checkDuplication(password);
         return log.result;
     };
     /*
@@ -59,7 +60,7 @@ exports.password=function(){
     };
     /*
      * @public
-     * @var object
+     * @returm object
      */
     this.getLog = function(){
         return log;
@@ -136,7 +137,8 @@ exports.password=function(){
                 lowerCase:0,
                 number:0,
                 special:0,
-                size:0
+                size:0,
+                duplication:0
             }
         };
     };
@@ -223,7 +225,7 @@ exports.password=function(){
      * @retun integer
      */
     let checkDuplication = function(checkStr){
-        checkStr=[...new Set(checkStr)];
+        return (checkStr.length - [...new Set(checkStr)].length);
     }
 };
 

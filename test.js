@@ -271,11 +271,12 @@ const passwordCheck = new (require('./index.js')).password();
                 ok: [],
                 result: true,
                 values:{
-                    upperCase :2,
-                    lowerCase :9,
-                    number    :4,
-                    special   :2,
-                    size      :17
+                    upperCase   :2,
+                    lowerCase   :9,
+                    number      :4,
+                    special     :2,
+                    size        :17,
+                    duplication :5
                 }
             }
 
