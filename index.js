@@ -4,57 +4,40 @@ exports.password=function(){
     /*
      * @param string {pass}
      * @public
-     * object
+     * @return object
      */
-    this.check=function(pass){
-        if(typeof pass === "string")
-            return false;
-        password = pass;
+    this.check=function(password){
         reset();
-        if(setup.check.upperCase)
-            log.checks.upperCase = checkCase(
-                password.match(/[A-Z]/g),
-                setup.min.upperCase,
-                setup.max.upperCase,
-                "upperCase"
-            );
-        if(setup.check.lowerCase)
-            log.checks.lowerCase = checkCase(
-                password.match(/[a-z]/g),
-                setup.min.lowerCase,
-                setup.max.lowerCase,
-                "lowerCase"
-            );
-        if(setup.check.number)
-            log.checks.number = checkCase(
-                password.match(/\d/g),
-                setup.min.number,
-                setup.max.number,
-                "number"
-            );
-        if(setup.check.special)
-            log.checks.special = checkCase(
-                password.match(/[$()@.!%*#?&]/g),
-                setup.min.special,
-                setup.max.special,
-                "special"
-            );
-        if(setup.check.size)
-           log.checks.size = checkCase(
-                password,
-                setup.min.size,
-                setup.max.size,
-                "size"
-            );
+        if(typeof password !== "string")
+            return false;
+        checkCase(
+            password.match(/[A-Z]/g),
+            "upperCase"
+        );
+        checkCase(
+            password.match(/[a-z]/g),
+            "lowerCase"
+        );
+        checkCase(
+            password.match(/\d/g),
+            "number"
+        );
+        checkCase(
+            password.match(/[$()@.!%*#?&]/g),
+            "special"
+        );
+       checkCase(
+            password,
+            "size"
+        );
         return log.result;
-
     };
     /*
      * @param string {type}
      * @param string {name}
      * @param string/number {value}
      * @public
-     * boolean
+     * @return boolean
      */
     this.set=function(type, name, value){
         if(typeof setup[type] === "undefined")
@@ -98,14 +81,14 @@ exports.password=function(){
             lowerCase:1,
             number:1,
             special:1,
-            size:7,
+            size:10,
         },
         max:{
-            upperCase:9,
-            lowerCase:9,
-            number:9,
-            special:9,
-            size:19,
+            upperCase:64,
+            lowerCase:64,
+            number:64,
+            special:64,
+            size:128,
         }
     };
     /*
@@ -137,11 +120,23 @@ exports.password=function(){
                     number:true,
                     special:true,
                     size:true
-                }
+                },
+                upperCase:true,
+                lowerCase:true,
+                number:true,
+                special:true,
+                size:true
             },
             failed:[],
             ok:[],
-            result:true
+            result:true,
+            values:{
+                upperCase:0,
+                lowerCase:0,
+                number:0,
+                special:0,
+                size:0
+            }
         };
     };
     /*
@@ -162,52 +157,62 @@ exports.password=function(){
             (typeof log.checks[limit][target] !== "undefined")
         )
             log.checks[limit][target] = false;
+            log.checks[target] = false;
         log.result=false;
-        return false;
+        return limit;
     };
     /*
+     *  @param string {target}
+     *  @private
+     *  @return boolean
+     */
+    let setupMissCheck = function(target){
+        if(
+            (typeof target === "undefined")||
+            (typeof target !== "string")||
+            (typeof setup.check[target] !== "boolean")||
+            (setup.check[target] === false)||
+            (setupLimitMissCheck(target, 'min'))||
+            (setupLimitMissCheck(target, 'max'))
+        )
+            return true;
+        return false;
+    }
+    /*
+     *  @param string {target}
+     *  @param string {limit}
+     *  @private
+     *  @return boolean
+     */
+    let setupLimitMissCheck = function(target, limit){
+        if(
+            (typeof setup[limit][target] === "undefined")||
+            (!Number.isInteger(setup[limit][target]))||
+            (typeof setup[limit][target] > 0)||
+            (typeof setup[limit][target] < 129)
+        )
+            return true;
+        return false;
+    }
+    /*
      * @param string  {checkStr}
-     * @param integer {max}
-     * @param integer {min}
      * @param string  {target}
      * @private
      * boolean
      */
-    let checkCase =function(checkStr, min, max, target){
-        if (
-            (typeof target === "undefined")||
-            (typeof target !== "string")
-        )
-            return false;
-        if (
-            (typeof max === "undefined")||
-            (parseInt(max).toString() !== (max).toString())
-        )
-            return false;
-        if (
-            (typeof min === "undefined")||
-            (parseInt(min).toString() !== (min).toString())
-        )
-            return false;
+    let checkCase =function(checkStr, target){
+        if (setupMissCheck(target))
+            return "pussy";
         if (
             (typeof checkStr === "undefined")||
             (checkStr === null)
         )
-            return false;
-        if(
-            (parseInt(min).toString() != min.toString())||
-            (parseInt(max).toString() != max.toString())
-        )
             return failed(target);
-        if(
-            (min > 0) &&
-            (min > checkStr.length)
-        )
+        let size = checkStr.length;
+        log.values[target] = size;
+        if(setup['min'][target] > size)
             return failed(target);
-        if(
-            (max > 0) &&
-            (checkStr.length > max)
-        )
+        if(size > setup['max'][target])
             return failed(target, 1);
         return true;
     };

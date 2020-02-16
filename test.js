@@ -231,7 +231,7 @@ const passwordCheck = new (require('./index.js')).password();
               {
                  "function":passwordCheck.check,
                  "options":[
-                    "C0rr3ct.P4ssw0rd." 
+                    "C0rr3ct.P4ssw0rd."
                  ]
               },
               "===",
@@ -269,7 +269,14 @@ const passwordCheck = new (require('./index.js')).password();
                 },
                 failed: [],
                 ok: [],
-                result: true
+                result: true,
+                values:{
+                    upperCase :2,
+                    lowerCase :9,
+                    number    :4,
+                    special   :2,
+                    size      :17
+                }
             }
 
         );
