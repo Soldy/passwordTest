@@ -202,7 +202,7 @@ exports.password=function(){
      */
     let checkCase =function(checkStr, target){
         if (setupMissCheck(target))
-            return "pussy";
+            return false;
         if (
             (typeof checkStr === "undefined")||
             (checkStr === null)
