@@ -23,7 +23,7 @@ exports.password=function(){
             "number"
         );
         checkCase(
-            password.match(/[$()@.!%*#?&]/g),
+            password.match(/[${}\[\]\\\/'":;`¬||,.<>?|«»¢“”µæßðđŋħł@ł¶ŧ←↓→øþ¹²³€½()@.!%*#?&]/g),
             "special"
         );
        checkCase(
