@@ -59,14 +59,14 @@ exports.password=function(){
     };
     /*
      * @public
-     * object
+     * @var object
      */
     this.getLog = function(){
         return log;
     };
     /*
      * @private 
-     * object 
+     * @var object 
      */
     let setup={
         check:{
@@ -93,16 +93,17 @@ exports.password=function(){
     };
     /*
      * @private
-     * object
+     * @var object
      */
     let log={};
     /*
      * @private
-     * string
+     * @var string
      */
     let password="";
     /*
      * @private
+     * @var object
      */
     let reset=function(){
         log={
@@ -144,7 +145,7 @@ exports.password=function(){
      * @param string {limit}
      * @param string/number {value}
      * @private
-     * boolean
+     * @return boolean
      */
     let failed = function(target, limit){
         if(typeof limit === "undefined"){
@@ -159,7 +160,7 @@ exports.password=function(){
             log.checks[limit][target] = false;
             log.checks[target] = false;
         log.result=false;
-        return limit;
+        return true;
     };
     /*
      *  @param string {target}
@@ -198,7 +199,7 @@ exports.password=function(){
      * @param string  {checkStr}
      * @param string  {target}
      * @private
-     * boolean
+     * @return boolean
      */
     let checkCase =function(checkStr, target){
         if (setupMissCheck(target))
@@ -219,7 +220,7 @@ exports.password=function(){
     /*
      * @param string {checkStr}
      * @private
-     * boolean
+     * @retun integer
      */
     let checkDuplication = function(checkStr){
         checkStr=[...new Set(checkStr)];
